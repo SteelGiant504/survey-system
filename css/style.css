@@ -89,3 +89,19 @@ button:disabled {
     text-decoration: underline;
 }
 
+.survey-list a {
+    display: block;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #ecf0f1;
+    text-decoration: none;
+    color: #2c3e50;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #bdc3c7;
+}
+.survey-list a:hover {
+    background-color: #bdc3c7;
+}
+
