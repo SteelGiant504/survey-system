@@ -1,2 +1,0 @@
-# GitHub Pages対応アンケート管理モックアップ
-index.htmlをルートに配置して公開可能
