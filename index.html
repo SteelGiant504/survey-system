@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>画像アンケート</title>
+    <title>アンケート一覧</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
-        <h1 id="question-title">読み込み中...</h1>
-        <div id="options-container" class="image-grid"></div>
-        <p id="message"></p>
+        <h1>アンケート一覧</h1>
+        <div id="survey-list" class="survey-list"></div>
         <div class="admin-link">
-            <a href="admin.html">管理者画面はこちら</a>
+            <a href="admin.html">管理画面（新規作成）へ</a> | <a href="results.html">集計結果を見る</a>
         </div>
     </div>
     <script src="js/supabase-config.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
+
