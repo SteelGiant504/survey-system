@@ -1,3 +1,4 @@
+// js/app.js
 document.addEventListener('DOMContentLoaded', async () => {
     const titleEl = document.getElementById('question-title');
     const containerEl = document.getElementById('options-container');
@@ -5,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         // 最新の質問を取得
-        const { data: questions, error: qError } = await supabase
+        const { data: questions, error: qError } = await supabaseClient
             .from('questions')
             .select('*')
             .order('created_at', { ascending: false })
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         titleEl.textContent = question.title;
 
         // 質問に紐づく選択肢（画像）を取得
-        const { data: options, error: optError } = await supabase
+        const { data: options, error: optError } = await supabaseClient
             .from('options')
             .select('*')
             .eq('question_id', question.id);
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // クリックイベント（回答送信）
             div.addEventListener('click', async () => {
-                const { error: resError } = await supabase
+                const { error: resError } = await supabaseClient
                     .from('responses')
                     .insert([{ option_id: option.id }]);
 
