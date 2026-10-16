@@ -1,1 +1,22 @@
-<!DOCTYPE html><html lang='ja'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Survey CMS Ver4</title><link rel='stylesheet' href='css/style.css'></head><body><div class='sidebar'><h2>Survey CMS</h2></div><div class='main'><h1>アンケート作成</h1><input id='surveyTitle' placeholder='アンケート名'><button onclick='addQuestion()'>＋質問追加</button><div id='questions'></div><h2>プレビュー</h2><div id='preview'></div></div><script src='js/app.js'></script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画像アンケート</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="question-title">読み込み中...</h1>
+        <div id="options-container" class="image-grid"></div>
+        <p id="message"></p>
+        <div class="admin-link">
+            <a href="admin.html">管理者画面はこちら</a>
+        </div>
+    </div>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
