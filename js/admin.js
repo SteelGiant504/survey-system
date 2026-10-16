@@ -1,3 +1,4 @@
+// js/admin.js
 document.getElementById('admin-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = document.getElementById('submit-btn');
@@ -17,7 +18,7 @@ document.getElementById('admin-form').addEventListener('submit', async (e) => {
 
     try {
         // 1. 質問を questions テーブルに登録
-        const { data: questionData, error: qError } = await supabase
+        const { data: questionData, error: qError } = await supabaseClient
             .from('questions')
             .insert([{ title: questionTitle }])
             .select()
@@ -33,19 +34,19 @@ document.getElementById('admin-form').addEventListener('submit', async (e) => {
             const filePath = `${questionId}/${fileName}`;
 
             // ストレージにアップロード
-            const { error: uploadError } = await supabase.storage
+            const { error: uploadError } = await supabaseClient.storage
                 .from('survey-images')
                 .upload(filePath, file);
 
             if (uploadError) throw uploadError;
 
             // 公開URLを取得
-            const { data: publicUrlData } = supabase.storage
+            const { data: publicUrlData } = supabaseClient.storage
                 .from('survey-images')
                 .getPublicUrl(filePath);
 
             // optionsテーブルに登録
-            const { error: optError } = await supabase
+            const { error: optError } = await supabaseClient
                 .from('options')
                 .insert([{
                     question_id: questionId,
