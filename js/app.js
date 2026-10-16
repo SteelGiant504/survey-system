@@ -16,12 +16,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        // アンケートごとのリンクボタンを生成
+        // 強制的に縦並びにするための改修
         questions.forEach(q => {
+            const itemDiv = document.createElement('div');
+            itemDiv.style.marginBottom = '10px'; // 下に余白を作る
+            itemDiv.style.padding = '15px';
+            itemDiv.style.backgroundColor = '#ecf0f1';
+            itemDiv.style.borderRadius = '5px';
+            itemDiv.style.border = '1px solid #bdc3c7';
+
             const link = document.createElement('a');
             link.href = `survey.html?id=${q.id}`;
-            link.textContent = q.title;
-            listEl.appendChild(link);
+            link.textContent = '📋 ' + q.title; // 箇条書きのアイコンをつける
+            link.style.textDecoration = 'none';
+            link.style.color = '#2c3e50';
+            link.style.fontWeight = 'bold';
+            link.style.display = 'block'; // 横並びを防ぐ
+
+            itemDiv.appendChild(link);
+            listEl.appendChild(itemDiv);
         });
     } catch (error) {
         console.error(error);
