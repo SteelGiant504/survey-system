@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集計結果</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- エクセル出力用のライブラリ -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>アンケート集計結果</h1>
+        <div class="form-group">
+            <select id="survey-select" style="width: 100%; padding: 10px;">
+                <option value="">アンケートを選択してください</option>
+            </select>
+        </div>
+        <button id="download-btn" disabled>エクセルでダウンロード (.xlsx)</button>
+        <div id="results-container" class="image-grid" style="margin-top: 30px;"></div>
+        
+        <div class="admin-link">
+            <a href="admin.html">管理画面（新規作成）へ</a> | <a href="index.html">回答一覧へ戻る</a>
+        </div>
+    </div>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/results.js"></script>
+</body>
+</html>
+
