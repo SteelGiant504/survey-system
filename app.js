@@ -1,1 +1,0 @@
-const systemDesign={features:["画像選択","ランキング投票","回答再編集","メール認証","AI分析"]};console.log(systemDesign);
