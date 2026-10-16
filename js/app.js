@@ -1,66 +1,31 @@
 // js/app.js
 document.addEventListener('DOMContentLoaded', async () => {
-    const titleEl = document.getElementById('question-title');
-    const containerEl = document.getElementById('options-container');
-    const messageEl = document.getElementById('message');
+    const listEl = document.getElementById('survey-list');
 
     try {
-        // 最新の質問を取得
-        const { data: questions, error: qError } = await supabaseClient
+        // すべての質問を取得
+        const { data: questions, error } = await supabaseClient
             .from('questions')
             .select('*')
-            .order('created_at', { ascending: false })
-            .limit(1);
+            .order('created_at', { ascending: false });
 
-        if (qError) throw qError;
+        if (error) throw error;
 
         if (questions.length === 0) {
-            titleEl.textContent = '現在アンケートはありません。';
+            listEl.innerHTML = '<p>現在アンケートはありません。</p>';
             return;
         }
 
-        const question = questions[0];
-        titleEl.textContent = question.title;
-
-        // 質問に紐づく選択肢（画像）を取得
-        const { data: options, error: optError } = await supabaseClient
-            .from('options')
-            .select('*')
-            .eq('question_id', question.id);
-
-        if (optError) throw optError;
-
-        // 画像を描画
-        options.forEach(option => {
-            const div = document.createElement('div');
-            div.className = 'image-option';
-            
-            const img = document.createElement('img');
-            img.src = option.image_url;
-            img.alt = '選択肢';
-            
-            div.appendChild(img);
-            containerEl.appendChild(div);
-
-            // クリックイベント（回答送信）
-            div.addEventListener('click', async () => {
-                const { error: resError } = await supabaseClient
-                    .from('responses')
-                    .insert([{ option_id: option.id }]);
-
-                if (resError) {
-                    alert('送信エラー: ' + resError.message);
-                } else {
-                    containerEl.style.display = 'none';
-                    messageEl.textContent = '回答ありがとうございました！';
-                    messageEl.style.color = 'green';
-                }
-            });
+        // アンケートごとのリンクボタンを生成
+        questions.forEach(q => {
+            const link = document.createElement('a');
+            link.href = `survey.html?id=${q.id}`;
+            link.textContent = q.title;
+            listEl.appendChild(link);
         });
-
     } catch (error) {
         console.error(error);
-        titleEl.textContent = 'データの読み込みに失敗しました。';
+        listEl.innerHTML = '<p>データの読み込みに失敗しました。</p>';
     }
 });
 
